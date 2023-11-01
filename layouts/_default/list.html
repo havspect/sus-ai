@@ -1,0 +1,46 @@
+{{ define "main" }}
+<main aria-role="main" class="container" style="padding-top: 0;">
+    <h1>{{ .Title }}</h1>
+    {{ range .Pages }}
+      <div>
+        <hgroup style="padding-bottom: 0em;">
+            <h2>
+                <a href="{{ .Permalink }}"># {{ .Title }}</a>
+            </h2>
+
+            {{ $taxonomy := "authors" }}
+            {{ with .GetTerms $taxonomy }}
+                <span>Written by:</span>
+                {{ range . }}
+                    <span>
+                        <a href="{{ .RelPermalink }}">@{{ .LinkTitle }} </a>
+                    </span>
+                {{ end }}
+            {{ end }}
+
+            <span>  //  </span>
+            
+            <time>Written at: {{ .Date.Format "Mon, Jan 2, 2006" }}</time>
+            
+            <p>Tags:
+                {{ $taxonomy := "tags" }}
+                {{ with .GetTerms $taxonomy }}
+                    {{ range . }}
+                        <span>
+                            <a href="{{ .RelPermalink }}">#{{ .LinkTitle }} </a>
+                        </span>
+                    {{ end }}
+                {{ end }}
+                
+            </p>
+        </hgroup>
+        <p style="padding-top: 0;">
+            {{ .Summary }}
+        </p>
+      </div>
+
+      <br/>
+    {{ end }}
+</main>
+{{ end }}
+

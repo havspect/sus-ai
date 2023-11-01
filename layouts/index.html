@@ -1,28 +1,18 @@
 {{ define "main" }}
-  <main aria-role="main">
-    <header class="homepage-header">
-        <h1>{{ .Title }}</h1>
-    </header>
-    <div class="homepage-content">
-        <article>
-            {{ .Content }}
-        </article>
-    </div>
-    <div>
-      {{ range first 10 .Site.RegularPages }}
-        {{ .Render "summary" }}
+  <header class="homepage-header">
+      <h1>{{ .Title }}</h1>
+  </header>
+  <section>
+    {{ .Content }}
+  </section>
+  <section>
+    <div class="grid">
+      {{ range $.Site.Pages}}
+        {{ if and (eq .Type "pattern") (eq .Kind "page") }}
+        <article>{{ .Title }}</article>
+        {{ end }}
       {{ end }}
     </div>
-  </main>
-
-  <style>
-    h1 {
-        font-weight: bold;
-    }
-
-    article { 
-        max-width: 60em;
-        line-height: 1.5em;
-    }
-  </style>
+    
+  </section>
 {{ end }}
