@@ -1,0 +1,6 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "SusAI"
+subtitle="Sustainable development of artificial Inteligence"
+
+custom_css = ["css/main.css"]
